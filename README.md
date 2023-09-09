@@ -1,8 +1,11 @@
-# bash-cookbook 
-![](https://i.imgur.com/1cl8FAf.png)
+# Parse $PATH variable and output in readable format
 
-Collection of some useful Bash scripts
-
-## Table of contents:
-1. [Check if IP address is private or public](../../tree/check-ip-type)
-2. [Parse $PATH variable and output in readable format](../../tree/parse-path)
+## Setup
+1. Add permission:
+```shell
+chmod +x parse-path.sh
+```
+2. Move to the binaries folder:
+```shell
+sudo mv parse-path.sh /usr/local/bin/
+```
