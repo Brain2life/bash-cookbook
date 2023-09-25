@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <domain>"
+    exit 1
+fi
+
+domain=$1
+
+echo "Connecting to $domain on port 443..."
+
+# Extracting Certificate Information and Cipher and Protocol Information.
+certificate_info=$(echo | openssl s_client -connect "$domain:443" -servername "$domain" 2>/dev/null | openssl x509 -noout -text)
+
+# Extracting and Displaying Desired Certificate Parameters.
+echo "$certificate_info" | grep -E 'Subject:|Issuer:|Not Before:|Not After :|Public Key Algorithm:|RSA Public-Key:|Signature Algorithm:'
+
+echo
+echo "Cipher and Protocol Information:"
+echo | openssl s_client -connect "$domain:443" -servername "$domain" 2>/dev/null | grep -E 'Cipher|Protocol'
