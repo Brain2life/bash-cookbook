@@ -2,6 +2,11 @@
 
 Related article: []()
 
+## Requirements:
+OpenSSL 1.1.0 and later versions installed
+
+More info at [https://github.com/openssl/openssl](https://github.com/openssl/openssl)
+
 ## Make executable
 To make a custom bash script executable as a command from the terminal, you can follow these steps:
 
