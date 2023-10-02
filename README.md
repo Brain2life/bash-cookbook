@@ -1,6 +1,6 @@
 # Get parameters of secure TLS connection to the given domain
 
-Related article: []()
+Related article: [Basics of SSL/TLS secure connection](https://brain2life.hashnode.dev/basics-of-ssltls-secure-connection)
 
 ## Requirements:
 OpenSSL 1.1.0 and later versions installed
