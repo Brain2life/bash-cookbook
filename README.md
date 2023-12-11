@@ -1,10 +1,8 @@
-# bash-cookbook 
-![](https://i.imgur.com/1cl8FAf.png)
+# Split file into multiparts based on a specified size in MB
 
-Collection of some useful Bash scripts
+Related article: []()
 
-## Table of contents:
-1. [Check if IP address is private or public](../../tree/check-ip-type)
-2. [Parse $PATH variable and output in readable format](../../tree/parse-path)
-3. [Get parameters of secure TLS connection to the given domain](../../tree/tls-info)
-4. [Bash script that splits a file into multiple parts based on a specified size in MB](../../tree/split-file)
+## Usage
+1. Save this script in a file, for example `split_file.sh`.
+2. Make the script executable: `chmod +x split_file.sh`.
+3. Run the script with the desired file and part size in MB. For example: `./split_file.sh myfile.txt` 5 will split `myfile.txt` into 5 MB parts.
