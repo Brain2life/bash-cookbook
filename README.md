@@ -1,6 +1,6 @@
 # Split file into multiparts based on a specified size in MB
 
-Related article: []()
+Related article: [Get started with Amazon S3 multi-part upload](https://maxat-akbanov.com/get-started-with-amazon-s3-multi-part-upload)
 
 ## Usage
 1. Save this script in a file, for example `split_file.sh`.
