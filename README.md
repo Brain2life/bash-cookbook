@@ -1,11 +1,7 @@
-# bash-cookbook 
-![](https://i.imgur.com/1cl8FAf.png)
+# Docker cleanup
+This is a Bash script that includes error handling for stopping and removing all Docker containers and images. The script checks if there are any containers or images before attempting to stop, remove, or delete them. This prevents errors when there are no containers or images to process.
 
-Collection of some useful Bash scripts
-
-## Table of contents:
-1. [Check if IP address is private or public](../../tree/check-ip-type)
-2. [Parse $PATH variable and output in readable format](../../tree/parse-path)
-3. [Get parameters of secure TLS connection to the given domain](../../tree/tls-info)
-4. [Bash script that splits a file into multiple parts based on a specified size in MB](../../tree/split-file)
-5. [Cleanup all Docker containers and images on your system](../../tree/docker-cleanup)
+## Usage
+1. Copy the script into a file, for example, `docker_cleanup.sh`.
+2. Make the script executable with the command: `chmod +x docker_cleanup.sh`.
+3. Run the script using `./docker_cleanup.sh`.
