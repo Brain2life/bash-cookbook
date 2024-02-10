@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+echo -n "Please type in your Git hosting system: "
+read GIT_HOST
+
+case $GIT_HOST in
+	
+	GitHub)
+	echo "Setup for GitHub account"
+	git config user.name "<your_user_name>"
+	git config user.email "<your_email>"
+	git config user.signingkey <your_gpg_signing_key>
+	git config commit.gpgsign true
+	;;
+	
+	GitLab)
+	echo "Setup for GitLab account"
+	git config user.name "<your_user_name>"
+	git config user.email "<your_email>"
+	git config user.signingkey <your_gpg_signing_key>
+	git config commit.gpgsign true
+	;;
+
+	*)
+	echo "Unknown option, please try again"
+	;;
+esac
