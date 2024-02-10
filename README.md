@@ -1,12 +1,12 @@
-# bash-cookbook 
-![](https://i.imgur.com/1cl8FAf.png)
+# Set Git config settings for the repository
 
-Collection of some useful Bash scripts
+This script sets the Git config settings for the repository according to your input
 
-## Table of contents:
-1. [Check if IP address is private or public](../../tree/check-ip-type)
-2. [Parse $PATH variable and output in readable format](../../tree/parse-path)
-3. [Get parameters of secure TLS connection for the given domain](../../tree/tls-info)
-4. [Bash script that splits a file into multiple parts based on a specified size in MB](../../tree/split-file)
-5. [Cleanup all Docker containers and images on your system](../../tree/docker-cleanup)
-6. [Script to set the Git credentials for repository](../../tree/git-account-switcher)
+1. Set execution permissions:
+```bash
+chmod +x git-account-switcher
+```
+2. Move script to the `/usr/local/bin` directory:
+```bash
+sudo mv git-account-switcher /usr/local/bin
+```
