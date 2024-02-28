@@ -1,14 +1,22 @@
-# bash-cookbook 
-![](https://i.imgur.com/1cl8FAf.png)
+# Converter from decimal to binary and vice versa
 
-Collection of some useful Bash scripts
+## Installation
+1. Add execution permissions for the script:
+```bash
+chmod +x bdconvert
+```
+2. Move to the local bin folder:
+```bash
+sudo mv bdconvert /usr/local/bin/
+```
 
-## Table of contents:
-1. [Check if IP address is private or public](../../tree/check-ip-type)
-2. [Parse $PATH variable and output in readable format](../../tree/parse-path)
-3. [Get parameters of secure TLS connection for the given domain](../../tree/tls-info)
-4. [Bash script that splits a file into multiple parts based on a specified size in MB](../../tree/split-file)
-5. [Cleanup all Docker containers and images on your system](../../tree/docker-cleanup)
-6. [Set Git config settings for the repository](../../tree/git-account-switcher)
-7. [Completely remove the given package from the system](../../tree/remove-package)
-8. [Convert decimal number to binary and vice versa](../../tree/bdconvert)
+## Command options
+```
+--decimal <number>    Specify a decimal number to convert to binary.
+--binary <number>     Specify a binary number to convert to decimal.
+--bits <length>       Specify bit length for decimal to binary conversion. Default is 8.
+--help                Display this help message.
+```
+
+## Script explanation
+This script uses [bc](https://www.gnu.org/software/bc/manual/html_mono/bc.html), a command-line calculator, for the base conversion, and simple Bash string manipulation to ensure the binary output matches the specified bit length. If the decimal number requires more bits than specified, the output will exceed the specified bit length to ensure accuracy.
