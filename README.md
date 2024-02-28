@@ -18,5 +18,19 @@ sudo mv bdconvert /usr/local/bin/
 --help                Display this help message.
 ```
 
+## Usage
+1. To convert decimal numbers:
+```bash
+bdconvert --decimal 13
+```
+2. To convert from binary to decimal:
+```bash
+bdconvert --binary 10011010
+```
+3. Specify bit length for decimal to binary conversion. Default is 8:
+```bash
+bdconvert --decimal 13 --bits 6
+```
+
 ## Script explanation
 This script uses [bc](https://www.gnu.org/software/bc/manual/html_mono/bc.html), a command-line calculator, for the base conversion, and simple Bash string manipulation to ensure the binary output matches the specified bit length. If the decimal number requires more bits than specified, the output will exceed the specified bit length to ensure accuracy.
