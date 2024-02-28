@@ -1,0 +1,72 @@
+# Author: Maxat Akbanov
+# Description: Script that converts decimal number to binary and vice versa.
+
+#!/bin/bash
+
+# Function to convert Decimal to Binary
+convertDecimalToBinary() {
+    local decimal=$1
+    local binary=$(echo "obase=2;$decimal" | bc)
+
+    # Padding the binary number to match the specified bit length
+    while [ ${#binary} -lt $bit_length ]; do
+        binary="0$binary"
+    done
+
+    echo "Decimal to Binary: $binary"
+}
+
+# Function to convert Binary to Decimal
+convertBinaryToDecimal() {
+    local binary=$1
+    echo "Binary to Decimal: $((2#$binary))"
+}
+
+# Display help message
+displayHelp() {
+    echo "Usage: $0 [options]"
+    echo "Options:"
+    echo "  --decimal <number>    Specify a decimal number to convert to binary."
+    echo "  --binary <number>     Specify a binary number to convert to decimal."
+    echo "  --bits <length>       Specify bit length for decimal to binary conversion. Default is 8."
+    echo "  --help                Display this help message."
+    exit 1
+}
+
+# Default values
+bit_length=8
+mode=""
+number=""
+
+# Parse command line options
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --decimal) mode="decimal"; number="$2"; shift ;;
+        --binary) mode="binary"; number="$2"; shift ;;
+        --bits) bit_length="$2"; shift ;;
+        --help) displayHelp ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+# Validate input
+if [[ -z "$mode" || -z "$number" ]]; then
+    echo "Error: You must specify a mode (--decimal or --binary) and a number."
+    displayHelp
+fi
+
+# Perform the conversion based on mode
+if [[ "$mode" == "decimal" ]]; then
+    if ! [[ "$number" =~ ^[0-9]+$ ]]; then
+        echo "Error: The specified decimal number is not valid."
+        exit 1
+    fi
+    convertDecimalToBinary $number
+elif [[ "$mode" == "binary" ]]; then
+    if ! [[ "$number" =~ ^[0-1]+$ ]]; then
+        echo "Error: The specified binary number is not valid."
+        exit 1
+    fi
+    convertBinaryToDecimal $number
+fi
