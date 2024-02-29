@@ -1,0 +1,70 @@
+# Author: Maxat Akbanov
+# Description: Calculate networking information from the input IP CIDR range format address
+
+#!/bin/bash
+
+# Function to convert CIDR subnet mask to a decimal format
+cidr_to_mask() {
+    local cidr=$1
+    local mask=$((0xffffffff << (32 - cidr)))
+    printf "%d.%d.%d.%d\n" $((mask >> 24 & 255)) $((mask >> 16 & 255)) $((mask >> 8 & 255)) $((mask & 255))
+}
+
+# Function to calculate the network address
+network_address() {
+    IFS=. read -r i1 i2 i3 i4 <<< "$1"
+    IFS=. read -r m1 m2 m3 m4 <<< "$2"
+    printf "%d.%d.%d.%d\n" $(($i1 & $m1)) $(($i2 & $m2)) $(($i3 & $m3)) $(($i4 & $m4))
+}
+
+# Function to calculate the broadcast address
+broadcast_address() {
+    IFS=. read -r i1 i2 i3 i4 <<< "$1"
+    IFS=. read -r m1 m2 m3 m4 <<< "$2"
+    printf "%d.%d.%d.%d\n" $(($i1 | ~$m1 & 255)) $(($i2 | ~$m2 & 255)) $(($i3 | ~$m3 & 255)) $(($i4 | ~$m4 & 255))
+}
+
+# Display help information
+show_help() {
+    echo "cidrcalc: A script for calculating subnet mask, network address, and broadcast address from CIDR notation."
+    echo "Usage: $0 IP/CIDR [--hosts] [--help]"
+    echo ""
+    echo "Options:"
+    echo "  --hosts        Calculate and display the number of usable hosts in the subnet."
+    echo "  --help         Display this help message and exit."
+    echo ""
+    echo "Examples:"
+    echo "  $0 192.168.1.1/24"
+    echo "  $0 10.0.0.1/16 --hosts"
+    echo ""
+    echo "The script takes an IP address in CIDR notation as input and calculates the corresponding subnet mask,"
+    echo "network address, and broadcast address. Use --hosts to also calculate the number of usable hosts."
+}
+
+# Main script starts here
+if [ "$#" -lt 1 ]; then
+    show_help
+    exit 1
+fi
+
+if [[ "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
+IP_CIDR=$1
+IP_ADDRESS=$(echo $IP_CIDR | cut -d'/' -f1)
+CIDR=$(echo $IP_CIDR | cut -d'/' -f2)
+
+SUBNET_MASK=$(cidr_to_mask $CIDR)
+NETWORK_ADDRESS=$(network_address $IP_ADDRESS $SUBNET_MASK)
+BROADCAST_ADDRESS=$(broadcast_address $IP_ADDRESS $SUBNET_MASK)
+
+echo "Subnet Mask: $SUBNET_MASK"
+echo "Network Address: $NETWORK_ADDRESS"
+echo "Broadcast Address: $BROADCAST_ADDRESS"
+
+if [[ "$2" == "--hosts" ]]; then
+    HOSTS=$((2 ** (32 - CIDR) - 2))
+    echo "Number of Usable Hosts: $HOSTS"
+fi
