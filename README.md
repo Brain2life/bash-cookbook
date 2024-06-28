@@ -1,16 +1,25 @@
-# bash-cookbook 
-![](https://i.imgur.com/1cl8FAf.png)
+# Cleanup pods in K8s cluster with 'Failed' or 'Unknown' statuses
 
-Collection of some useful Bash scripts
+## Overview
 
-## Table of contents:
-1. [Check if IP address is private or public](../../tree/check-ip-type)
-2. [Parse $PATH variable and output in readable format](../../tree/parse-path)
-3. [Get parameters of secure TLS connection for the given domain](../../tree/tls-info)
-4. [Bash script that splits a file into multiple parts based on a specified size in MB](../../tree/split-file)
-5. [Cleanup all Docker containers and images on your system](../../tree/docker-cleanup)
-6. [Set Git config settings for the repository](../../tree/git-account-switcher)
-7. [Completely remove the given package from the system](../../tree/remove-package)
-8. [Convert decimal number to binary and vice versa](../../tree/bdconvert)
-9. [Calculate network, broadcast addresses, subnet mask and number of availalbe hosts from IP CIDR range](../../tree/cidrcalc)
-10. [Cleanup all pods in K8s cluster with 'Failed' or 'Unknown' statuses](../../tree/k8s-cleanup-pods)
+The `k8s-cleanup-pods` script deletes all pods in the given namespace that has the status of `Failed` or `Unknown`.  
+To learn more about pod statuses in Kubernetes, see [Pod phase](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase).
+
+> **IMPORTANT**. Use script only in **non-prod environments**, as deleting pods can leave you without any logs and debugging information. The main purpose of the script is to free up the ephemeral storage in the cluster, as even `Failed` and in general `Terminated` pods take up the space in the cluster.
+
+To use the script:
+```bash
+k8s-cleanup-pods [namespace]
+```
+
+To get help information use `--help` argument.
+
+To install the script:
+```bash
+chmod +x k8s-cleanup-pods
+sudo mv k8s-cleanup-pods /usr/local/bin/
+```
+
+## Use cases
+1. You can use the script in CI/CD pipeline as part of cleanup job
+2. Use script in scheduled CronJob to run it regularly in the cluster
