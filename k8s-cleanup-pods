@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Author: Maxat Akbanov
+# Date: 28 June 2024
+# Description: Delete pods in the given namespace with 'Failed' and 'Unknown' statuses
+
+function show_help {
+    echo "Usage: k8s-cleanup-pods [namespace]"
+    echo ""
+    echo "Arguments:"
+    echo " namespace      The namespace to cleanup pods."
+    echo " --help         Show this help message"
+}
+
+# Check if the --help argument is provided
+if [[ "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
+# Check if a namespace is provided as an argument
+if [ -z "$1" ]; then
+    echo "No namespace specified. Please provide valid namespace."
+    exit 0
+else
+    namespace=$1
+    echo "Cleaning up pods in namespace: $namespace"
+    kubectl delete po --field-selector=status.phase=Failed --namespace $namespace
+    kubectl delete po --field-selector=status.phase=Unknown --namespace $namespace
