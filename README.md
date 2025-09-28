@@ -4,6 +4,7 @@
 Collection of some useful Bash scripts
 
 ## Table of contents:
+- [100 useful Linux commands](./100-linux-commands/)
 - [Check if IP address is private or public](../../tree/check-ip-type)
 - [Parse $PATH variable and output in readable format](../../tree/parse-path)
 - [Get parameters of secure TLS connection for the given domain](../../tree/tls-info)
